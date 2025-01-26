@@ -19,14 +19,17 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log("DB connected"))
   .catch((err) => console.log(err))
 
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
-
 
 app.use('/user', userRoutes)
 app.use('/auth', authRoutes)
 app.use('/loan',authenticateUser, loanRoutes)
 
+app.get("/", (req, res) => {
+  res.send("Hello Uzair");
+});
+
+app.use((req, res) => {
+  sendResponse(res, 400, {}, true, "Page not found");
+});
 
 app.listen(process.env.PORT, () => console.log(`Server is running on PORT ${process.env.PORT}`));
