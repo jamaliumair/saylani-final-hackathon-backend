@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
-import userRoutes from './routes/user.js'
 import authRoutes from './routes/authRoutes.js'
 import authenticateUser from './middleware/authenticateuser.js'
 import loanRoutes from './routes/loan.js'
 import mongoose from "mongoose";
 import 'dotenv/config'
 import morgan from "morgan";
+import sendResponse from "./helpers/utilityFunctions.js";
 
 
 const app = express();
@@ -20,12 +20,11 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch((err) => console.log(err))
 
 
-app.use('/user', userRoutes)
 app.use('/auth', authRoutes)
 app.use('/loan',authenticateUser, loanRoutes)
 
 app.get("/", (req, res) => {
-  res.send("Hello Uzair");
+  res.send("Hello Umair");
 });
 
 app.use((req, res) => {
